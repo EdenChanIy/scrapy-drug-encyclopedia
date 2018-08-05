@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from scrapy.exporters import JsonLinesItemExporter
 # Scrapy settings for quotesbot project
 #
 # For simplicity, this file contains only settings considered important or
@@ -8,6 +8,16 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+
+class CustomJsonLinesItemExporter(JsonLinesItemExporter):
+    def __init__(self, file, **kwargs):
+        super(CustomJsonLinesItemExporter, self).__init__(file, ensure_ascii=False, **kwargs)
+
+FEED_EXPORTERS = {
+    'json' : 'quotesbot.settings.CustomJsonLinesItemExporter',
+}
+
+HTTPERROR_ALLOWED_CODES = [404]
 
 BOT_NAME = 'quotesbot'
 

@@ -19,4 +19,3 @@ class ToScrapeSpiderXPath(scrapy.Spider):
         next_page_url = response.xpath('//li[@class="next"]/a/@href').extract_first()
         if next_page_url is not None:
             yield scrapy.Request(response.urljoin(next_page_url))
-

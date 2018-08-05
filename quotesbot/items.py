@@ -6,6 +6,7 @@
 # http://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+import re
 
 
 class QuotesbotItem(scrapy.Item):
