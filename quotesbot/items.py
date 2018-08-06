@@ -11,6 +11,8 @@ import scrapy
 class QuotesbotItemTCM(scrapy.Item):
     #名称
     name = scrapy.Field()
+    #类型
+    type = scrapy.Field()
     #别名
     alias = scrapy.Field()
     #药用部位
@@ -32,6 +34,8 @@ class QuotesbotItemTCM(scrapy.Item):
 class QuotesbotItemWM(scrapy.Item):
     #名称
     name = scrapy.Field()
+    #类型
+    type = scrapy.Field()
     #成分
     component = scrapy.Field()
     #功能主治

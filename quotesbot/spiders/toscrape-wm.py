@@ -12,6 +12,8 @@ class ToScrapeWMSpider(scrapy.Spider):
         item = QuotesbotItemWM()
         #名称
         item["name"] = response.xpath('//div[@class="instruction"]//dl[1]//a/text()').extract_first()
+        #类型
+        item["type"] = response.xpath('//div[@class="crumb"]/ul/li[4]//span/text()').extract_first()
         #成分
         item["component"] = response.xpath('//div[@class="instruction"]//dl[2]//dd/text()').extract_first().strip()
         #功能主治

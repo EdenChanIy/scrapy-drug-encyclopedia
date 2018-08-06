@@ -12,6 +12,8 @@ class ToScrapeTCMSpider(scrapy.Spider):
         item = QuotesbotItemTCM()
         #名称
         item["name"] = response.xpath('//div[@class="yps_top"]//div[@class="t1"]//h1/text()').extract_first().strip()
+        #类型
+        item["type"] = response.xpath('//div[@class="subs"]/p/a[3]/text()').extract_first()
         #别名
         item["alias"] = response.xpath('//div[@id="tab2_con_2"]//dd/text()').extract_first()
         #药用部位
