@@ -31,6 +31,7 @@ class ToScrapeTCMSpider(scrapy.Spider):
             'compatibility_incompatibility': response.xpath('//div[@id="tab2_con_10"]//dd/text()').extract_first()
         }
 
+    #通过使用循环来增加爬取网址
     def start_requests(self):
         pages=[]
         for i in range(4882, 5100):

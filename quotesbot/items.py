@@ -11,5 +11,13 @@ import re
 
 class QuotesbotItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    #中西药
+    name = scrapy.Field()
+    component = scrapy.Field()
+    functional_management = scrapy.Field()
+    usage_dosage = scrapy.Field()
+    pharmacological = scrapy.Field()
+    compatibility_incompatibility = scrapy.Field()
+    adverse_reactions = scrapy.Field()
+    matters = scrapy.Field()
     pass
