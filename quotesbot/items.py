@@ -8,8 +8,22 @@
 import scrapy
 import re
 
+class QuotesbotItemTCM(scrapy.Item):
+    # define the fields for your item here like:
+    #中西药
+    name = scrapy.Field()
+    alias = scrapy.Field()
+    medicinal_part = scrapy.Field()
+    component = scrapy.Field()
+    functional_management = scrapy.Field()
+    usage_dosage = scrapy.Field()
+    prescription = scrapy.Field()
+    clinical_application = scrapy.Field()
+    compatibility_incompatibility = scrapy.Field()
+    # pass
 
-class QuotesbotItem(scrapy.Item):
+
+class QuotesbotItemWM(scrapy.Item):
     # define the fields for your item here like:
     #中西药
     name = scrapy.Field()
@@ -20,4 +34,4 @@ class QuotesbotItem(scrapy.Item):
     compatibility_incompatibility = scrapy.Field()
     adverse_reactions = scrapy.Field()
     matters = scrapy.Field()
-    pass
+    # pass
