@@ -1,19 +1,12 @@
 # QuotesBot
-This is a Scrapy project to scrape quotes from famous people from http://quotes.toscrape.com ([github repo](https://github.com/scrapinghub/spidyquotes)).
+该爬虫分别在39健康网和12药房网爬取相关的中药材和中西成药的信息
+修改自Scrapy文档中的Quotesbot例子
 
 This project is only meant for educational purposes.
 
 
-## Extracted data
-
-This project extracts quotes, combined with the respective author names and tags.
-The extracted data looks like this sample:
-
-    {
-        'author': 'Douglas Adams',
-        'text': '“I may not have gone where I intended to go, but I think I ...”',
-        'tags': ['life', 'navigation']
-    }
+##爬取的数据
+爬取的数据类型请参照items.py中的说明
 
 
 ## Spiders
@@ -22,22 +15,20 @@ This project contains two spiders and you can list them using the `list`
 command:
 
     $ scrapy list
-    toscrape-css
-    toscrape-xpath
-
-Both spiders extract the same data from the same website, but `toscrape-css`
-employs CSS selectors, while `toscrape-xpath` employs XPath expressions.
-
-You can learn more about the spiders by going through the
-[Scrapy Tutorial](http://doc.scrapy.org/en/latest/intro/tutorial.html).
+    toscrape-tcm
+    toscrape-wm
 
 
 ## Running the spiders
 
 You can run a spider using the `scrapy crawl` command, such as:
 
-    $ scrapy crawl toscrape-css
+    $ scrapy crawl toscrape-tcm
 
 If you want to save the scraped data to a file, you can pass the `-o` option:
     
-    $ scrapy crawl toscrape-css -o quotes.json
+    $ scrapy crawl toscrape-tcm -o quotes.json
+
+
+## 数据存储
+当前爬虫默认将爬取数据以json的格式存放，运行爬虫后可以在项目根目录下看到data_tcm.json及data_wm.json文件
