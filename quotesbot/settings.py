@@ -25,7 +25,7 @@ SPIDER_MODULES = ['quotesbot.spiders']
 NEWSPIDER_MODULE = 'quotesbot.spiders'
 
 ITEM_PIPELINES = {
-    # 'quotesbot.pipelines.QuotesbotPipeline': 300,
+    'quotesbot.pipelines.QuotesbotPipeline': 300,
     # 'quotesbot.pipelines.ImagePipeline': 400,
     'quotesbot.pipelines.MySQLPipeline': 500,
 }
