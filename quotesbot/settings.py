@@ -25,9 +25,17 @@ SPIDER_MODULES = ['quotesbot.spiders']
 NEWSPIDER_MODULE = 'quotesbot.spiders'
 
 ITEM_PIPELINES = {
-    'quotesbot.pipelines.QuotesbotPipeline': 300,
-    'quotesbot.pipelines.ImagePipeline': 400,
+    # 'quotesbot.pipelines.QuotesbotPipeline': 300,
+    # 'quotesbot.pipelines.ImagePipeline': 400,
+    'quotesbot.pipelines.MySQLPipeline': 500,
 }
+
+#添加Mysql数据库连接信息
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'scrapy'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = 'admin'
+MYSQL_PORT = 3306
 
 IMAGES_STORE = './picture'
 

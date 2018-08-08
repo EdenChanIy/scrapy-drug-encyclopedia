@@ -53,5 +53,4 @@ class QuotesbotItemWM(scrapy.Item):
     adverse_reactions = scrapy.Field()
     #注意事项
     matters = scrapy.Field()
-
     
