@@ -30,12 +30,14 @@ class ToScrapeTCMSpider(scrapy.Spider):
         item["clinical_application"] = response.xpath('//div[@id="tab2_con_9"]//dd/text()').extract_first()
         #宜忌
         item["compatibility_incompatibility"] = response.xpath('//div[@id="tab2_con_10"]//dd/text()').extract_first()
+        
+        item['image_urls'] = response.xpath('//div[@class="imgbox"]/img/@src').extract_first(),
         return item
 
     #通过使用循环来增加爬取网址
     def start_requests(self):
         pages=[]
-        for i in range(4882, 5900):
+        for i in range(4882, 4890):
             urls='http://ypk.39.net/c51%s/'%i
             page=scrapy.Request(urls)
             pages.append(page)

@@ -8,6 +8,8 @@ from scrapy.exceptions import DropItem
 import json
 from quotesbot.items import QuotesbotItemTCM
 from quotesbot.items import QuotesbotItemWM
+from scrapy.pipelines.images import ImagesPipeline
+import scrapy
 
 
 class QuotesbotPipeline(object):
@@ -43,4 +45,9 @@ class QuotesbotPipeline(object):
                 return item
             else:
                 #丢弃掉名称为空值的数据
-                raise DropItem("Missing name in %s" % item)            
+                raise DropItem("Missing name in %s" % item)      
+
+class ImagePipeline(ImagesPipeline):
+    def get_media_requests(self, item, info):
+        for image_url in item['image_urls']:
+            yield scrapy.Request(image_url)

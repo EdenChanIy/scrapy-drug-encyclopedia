@@ -26,7 +26,10 @@ NEWSPIDER_MODULE = 'quotesbot.spiders'
 
 ITEM_PIPELINES = {
     'quotesbot.pipelines.QuotesbotPipeline': 300,
+    'quotesbot.pipelines.ImagePipeline': 400,
 }
+
+IMAGES_STORE = './picture'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'quotesbot (+http://www.yourdomain.com)'

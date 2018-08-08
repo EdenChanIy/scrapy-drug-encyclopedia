@@ -30,6 +30,9 @@ class QuotesbotItemTCM(scrapy.Item):
     #宜忌
     compatibility_incompatibility = scrapy.Field()
 
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
+
 #中西成药
 class QuotesbotItemWM(scrapy.Item):
     #名称
@@ -50,3 +53,5 @@ class QuotesbotItemWM(scrapy.Item):
     adverse_reactions = scrapy.Field()
     #注意事项
     matters = scrapy.Field()
+
+    
