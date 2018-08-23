@@ -19,9 +19,9 @@ class QuotesbotPipeline(object):
 
     def open_spider(self, spider):
         if(spider.name=='toscrape-tcm'):
-            self.file0 = open('data_tcm.json', 'w', encoding='utf-8')
+            self.file0 = open('json/data_tcm.json', 'w', encoding='utf-8')
         elif(spider.name=='toscrape-wm'):
-            self.file1 = open('data_wm.json', 'w', encoding='utf-8')
+            self.file1 = open('json/data_wm.json', 'w', encoding='utf-8')
 
     def close_spider(self, spider):
         if(spider.name=='toscrape-tcm'):
