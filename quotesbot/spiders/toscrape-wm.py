@@ -41,7 +41,7 @@ class ToScrapeWMSpider(scrapy.Spider):
     #通过使用循环来增加爬取网址
     def start_requests(self):
         pages=[]
-        for i in range(2802, 2810):
+        for i in range(2802, 6000):
             urls='http://www.12yao.com/baike/%s/'%i
             page=scrapy.Request(urls)
             pages.append(page)
