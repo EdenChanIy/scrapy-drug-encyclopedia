@@ -32,6 +32,7 @@ class QuotesbotItemTCM(scrapy.Item):
 
     image_urls = scrapy.Field()
     images = scrapy.Field()
+    image_name = scrapy.Field()
 
 #中西成药
 class QuotesbotItemWM(scrapy.Item):

@@ -46,9 +46,17 @@ class QuotesbotPipeline(object):
 
 #爬取图片
 class ImagePipeline(ImagesPipeline):
+    def file_path(self, request, response=None, info=None):
+        image_guid = request.url.split('/')[-1]
+        return 'full/%s' % (image_guid)
+
     def get_media_requests(self, item, info):
         for image_url in item['image_urls']:
+            item['image_name'] = image_url.split('/')[-1]
+            print(item['image_name'])
             yield scrapy.Request(image_url)
+
+    
 
 #存入mysql
 class MySQLPipeline(object):
