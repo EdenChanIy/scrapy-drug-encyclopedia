@@ -28,9 +28,10 @@ ITEM_PIPELINES = {
     'quotesbot.pipelines.QuotesbotPipeline': 300,
     'quotesbot.pipelines.ImagePipeline': 400,
     # 'quotesbot.pipelines.MySQLPipeline': 500,
+    # 'quotesbot.pipelines.MySQLImagePipeline': 600,
 }
 
-#添加Mysql数据库连接信�
+#添加Mysql数据库连接信息
 MYSQL_HOST = 'localhost'
 MYSQL_DBNAME = 'scrapy'
 MYSQL_USER = 'root'

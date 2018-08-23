@@ -37,7 +37,7 @@ class ToScrapeTCMSpider(scrapy.Spider):
     #通过使用循环来增加爬取网址
     def start_requests(self):
         pages=[]
-        for i in range(4882, 4890):
+        for i in range(4890, 4920):
             urls='http://ypk.39.net/c51%s/'%i
             page=scrapy.Request(urls)
             pages.append(page)

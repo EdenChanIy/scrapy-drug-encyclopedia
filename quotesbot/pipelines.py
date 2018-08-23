@@ -139,3 +139,39 @@ class MySQLPipeline(object):
     def close_spider(self, spider):
         self.cursor.close()
         self.connect.close()
+
+#为mysql中的数据添加image_url字段及其内容
+class MySQLImagePipeline(object):
+    Update = "update drug_encyclopedia set image_url = '{image_urls}' where name = '{name}'"              
+    def __init__(self, settings):
+        self.settings = settings
+    
+    def process_item(self, item, spider):
+        sqltext = self.Update.format(
+            name=pymysql.escape_string(item['name']),
+            image_urls=pymysql.escape_string(item['image_urls'][0])
+        )
+        self.cursor.execute(sqltext)
+        return item
+        
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler.settings)
+    
+    def open_spider(self, spider):
+        self.connect = pymysql.connect(
+             host=self.settings.get('MYSQL_HOST'),
+            port=self.settings.get('MYSQL_PORT'),
+            db=self.settings.get('MYSQL_DBNAME'),
+            user=self.settings.get('MYSQL_USER'),
+            passwd=self.settings.get('MYSQL_PASSWD'),
+            charset='utf8',
+            use_unicode=True
+        )
+        self.cursor = self.connect.cursor()
+        self.connect.autocommit(True)
+
+    def close_spider(self, spider):
+        self.cursor.close()
+        self.connect.close()
