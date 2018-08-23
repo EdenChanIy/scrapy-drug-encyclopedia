@@ -53,7 +53,6 @@ class ImagePipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         for image_url in item['image_urls']:
             item['image_name'] = image_url.split('/')[-1]
-            print(item['image_name'])
             yield scrapy.Request(image_url)
 
     

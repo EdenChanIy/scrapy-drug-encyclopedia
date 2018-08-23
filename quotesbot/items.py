@@ -54,4 +54,8 @@ class QuotesbotItemWM(scrapy.Item):
     adverse_reactions = scrapy.Field()
     #注意事项
     matters = scrapy.Field()
+
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
+    image_name = scrapy.Field() #存放图片名字
     

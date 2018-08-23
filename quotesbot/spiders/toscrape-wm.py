@@ -10,6 +10,14 @@ class ToScrapeWMSpider(scrapy.Spider):
 
     def parse(self, response):
         item = QuotesbotItemWM()
+        item['image_urls'] = response.xpath('//li[@class="jqzoom show"]/img/@src').extract_first(),
+        # item_details_url = response.url + 'detailed'
+        item_details_url = response.xpath('//div[@class="tab_link"]//a[contains(text(), "药品详细说明")]/@href').extract_first()
+        if item['image_urls']:
+            yield scrapy.Request(url=item_details_url, meta={'item': item}, callback=self.parse_item)
+
+    def parse_item(self, response):
+        item = response.meta['item']
         #名称
         item["name"] = response.xpath('//div[@class="instruction"]//dl[1]//a/text()').extract_first()
         #类型
@@ -33,8 +41,8 @@ class ToScrapeWMSpider(scrapy.Spider):
     #通过使用循环来增加爬取网址
     def start_requests(self):
         pages=[]
-        for i in range(2802, 6000):
-            urls='http://www.12yao.com/baike/%s/detailed'%i
+        for i in range(2802, 2820):
+            urls='http://www.12yao.com/baike/%s/'%i
             page=scrapy.Request(urls)
             pages.append(page)
         return pages
