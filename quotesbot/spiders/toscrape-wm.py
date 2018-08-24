@@ -13,7 +13,7 @@ class ToScrapeWMSpider(scrapy.Spider):
         item['image_urls'] = response.xpath('//li[@class="jqzoom show"]/img/@src').extract_first(),
         # item_details_url = response.url + 'detailed'
         item_details_url = response.xpath('//div[@class="tab_link"]//a[contains(text(), "药品详细说明")]/@href').extract_first()
-        if item['image_urls']:
+        if item['image_urls'] and item_details_url:
             yield scrapy.Request(url=item_details_url, meta={'item': item}, callback=self.parse_item)
 
     def parse_item(self, response):
@@ -23,7 +23,9 @@ class ToScrapeWMSpider(scrapy.Spider):
         #类型
         item["type"] = response.xpath('//div[@class="crumb"]/ul/li[4]//span/text()').extract_first()
         #成分
-        item["component"] = response.xpath('//div[@class="instruction"]//dl[2]//dd/text()').extract_first().strip()
+        item["component"] = response.xpath('//div[@class="instruction"]//dl[2]//dd/text()').extract_first().strip()      
+        if item["component"] is '':
+            item["component"] = response.xpath('//div[@class="instruction"]//dl[2]//dd/p/text()').extract_first().strip()
         #功能主治
         item["functional_management"] = response.xpath('//div[@class="instruction"]//dl[3]//dd/text()').extract_first().strip()
         #用法与用量
@@ -41,7 +43,7 @@ class ToScrapeWMSpider(scrapy.Spider):
     #通过使用循环来增加爬取网址
     def start_requests(self):
         pages=[]
-        for i in range(2802, 6000):
+        for i in range(1632, 1635): #2802-6000
             urls='http://www.12yao.com/baike/%s/'%i
             page=scrapy.Request(urls)
             pages.append(page)

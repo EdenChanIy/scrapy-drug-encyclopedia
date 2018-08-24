@@ -52,27 +52,30 @@ class ImagePipeline(ImagesPipeline):
 
     def get_media_requests(self, item, info):
         for image_url in item['image_urls']:
-            item['image_name'] = image_url.split('/')[-1]
-            yield scrapy.Request(image_url)
+            if image_url:
+                item['image_name'] = image_url.split('/')[-1]
+                yield scrapy.Request(image_url)
 
     
 
 #存入mysql
 class MySQLPipeline(object):
     tcmInsert = '''insert into drug_encyclopedia(
-                    category,name,type,alias,medicinal_part,component,functional_manage,
+                    category,name,image_url,type,alias,medicinal_part,component,functional_manage,
                     usage_dosage,prescription,clinical_application,compat_incompat)
-                    values(0,'{name}','{type}','{alias}','{medicinal_part}','{component}','{functional_manage}',
+                    values(0,'{name}','{image_url}','{type}','{alias}','{medicinal_part}','{component}','{functional_manage}',
                     '{usage_dosage}','{prescription}','{clinical_application}','{compat_incompat}')'''
-    wmInsert = '''insert into drug_encyclopedia(category,name,type,component,functional_manage,usage_dosage,
+    wmInsert = '''insert into drug_encyclopedia(category,name,image_url,type,component,functional_manage,usage_dosage,
                     pharmacological,compat_incompat,adverse_reactions,matters) 
-                    values(1,'{name}','{type}','{component}','{functional_manage}','{usage_dosage}',
+                    values(1,'{name}','{image_url}','{type}','{component}','{functional_manage}','{usage_dosage}',
                     '{pharmacological}','{compat_incompat}','{adverse_reactions}','{matters}')'''
     def __init__(self, settings):
         self.settings = settings
     
     def process_item(self, item, spider):
         if isinstance(item, QuotesbotItemTCM):
+            if item['image_urls'] is None:
+                item['image_urls'] = 'null'
             if item['alias'] is None:
                 item['alias'] = 'null'
             if item['medicinal_part'] is None:
@@ -91,6 +94,7 @@ class MySQLPipeline(object):
                 item['compatibility_incompatibility'] = 'null'
             sqltext = self.tcmInsert.format(
                 name=pymysql.escape_string(item['name']),
+                image_url = pymysql.escape_string(item['image_urls'][0]),
                 type=pymysql.escape_string(item['type']),
                 alias=pymysql.escape_string(item['alias']),
                 medicinal_part=pymysql.escape_string(item['medicinal_part']),
@@ -106,6 +110,7 @@ class MySQLPipeline(object):
         elif isinstance(item, QuotesbotItemWM):
             sqltext = self.wmInsert.format(
                 name=pymysql.escape_string(item['name']),
+                image_url = pymysql.escape_string(item['image_urls'][0]),
                 type=pymysql.escape_string(item['type']),
                 component=pymysql.escape_string(item['component']),
                 functional_manage=pymysql.escape_string(item['functional_management']),
